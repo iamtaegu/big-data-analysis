@@ -1,3 +1,4 @@
-print("hello world")
-print("hello develop world")
-print("#2 bug fixed")
+if __name__ == '__main__':
+    print("hello world")
+    print("hello develop world")
+    print("#2 bug fixed")
