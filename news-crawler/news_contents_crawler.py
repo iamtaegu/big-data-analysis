@@ -7,9 +7,6 @@ import requests
 
 from bs4 import BeautifulSoup
 
-import warnings
-warnings.filterwarnings("ignore")
-
 def fetch_news_contents(msg):
 #    print(msg)
     #print(msg.message_id)
