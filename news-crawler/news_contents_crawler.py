@@ -63,8 +63,8 @@ def fetch_news_contents(msg):
     body_text = body.text.strip()
 
     images = body.find_all("img")
-    images_urls = [x['data-src'] for x in images]
-    images_urls = list(set(images_urls))
+    image_urls = [x['data-src'] for x in images]
+    image_urls = list(set(images_urls))
 
     byline = soup.find("span", {"class": "byline_s"})
     reporter_name, reporter_email = extract_reporter(byline)
@@ -75,7 +75,7 @@ def fetch_news_contents(msg):
     # print(updated_at)
     # print(source_url)
     # print(body_text)
-    # print(images_urls)
+    # print(image_urls)
     # print(reporter_name)
     # print(reporter_email)
 
