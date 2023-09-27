@@ -78,8 +78,7 @@ def parse_datestr(span):
 
     date = dt.datetime.fromisoformat(datestr)
 
-    pdb.set_trace()
-    pass
+    return date
 
 def parse_media_info(soup):
     media_info = soup.find("div", {"class": "media_end_head_info_datestamp"})
