@@ -175,6 +175,8 @@ def upload_to_elastic_search(buffer):
         auth=ELASTICSEARCH_AUTH,
     )
 
+    print(resp.status_code)
+
     pdb.set_trace()
     pass
 
