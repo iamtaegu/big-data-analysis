@@ -44,7 +44,7 @@ def fetch_news_contents(msg):
 
     if len(datestr_list) == 1:
         created_at = parse_datestr(datestr_list[0])
-        updated_at =- created_at
+        updated_at = created_at
 
     elif len(datestr_list) == 2:
         created_at = parse_datestr(datestr_list[0])
@@ -61,12 +61,17 @@ def fetch_news_contents(msg):
 
     body_text = body.text.strip()
 
+    images = body.find_all("img")
+    images_urls = [x['data-src'] for x in images]
+    images_urls = list(set(images_urls))
+
     print()
     print(publisher)
     print(created_at)
     print(updated_at)
     print(source_url)
     print(body_text)
+    print(images_urls)
 
     pdb.set_trace()
     pass
