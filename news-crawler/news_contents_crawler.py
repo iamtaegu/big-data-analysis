@@ -4,7 +4,9 @@ import boto3
 import datetime as dt
 
 def fetch_news_contents(msg):
-    print(msg)
+#    print(msg)
+    print(msg.message_id)
+    print(msg.body)
 
     pdb.set_trace()
     pass
