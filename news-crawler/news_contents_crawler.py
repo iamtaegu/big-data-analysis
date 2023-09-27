@@ -27,7 +27,7 @@ def fetch_news_contents(msg):
     node = soup.find("meta", {"property": "og:article:author"})
     if node:
         content = node['content']
-        print(content)
+        # print(content)
 
         if '네이버 스포츠' in content:
             return None
@@ -40,11 +40,31 @@ def fetch_news_contents(msg):
     else:
         pdb.set_trace()
 
+    datestr_list, source_url = parse_media_info(soup)
+
     print()
     print(publisher)
+    print(datestr_list)
+    print(source_url)
 
     pdb.set_trace()
     pass
+
+def parse_media_info(soup):
+    media_info = soup.find("div", {"class": "media_end_head_info_datestamp"})
+    print(media_info)
+
+    if media_info:
+        datestr_list = media_info.find_all("span", {"class":"media_end_head_info_datestamp_time"})
+
+        link = media_info.find("a", {"class": "media_end_head_origin_link"})
+        # 기사원문 버튼이 있는 경우와 없는 경우를 처리
+        source_url = link['href'] if link else ''
+
+        return datestr_list, source_url
+
+    pdb.set_trace()
+
 
 if __name__ == '__main__':
     sqs = boto3.resource('sqs')
