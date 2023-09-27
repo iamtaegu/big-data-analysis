@@ -76,6 +76,8 @@ def parse_datestr(span):
     else:
         return None
 
+    date = dt.datetime.fromisoformat(datestr)
+
     pdb.set_trace()
     pass
 
