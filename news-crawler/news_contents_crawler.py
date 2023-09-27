@@ -22,7 +22,7 @@ def fetch_news_contents(msg):
     if resp.status_code != 200:
         return None
 
-    soup = BeautifulSoup(resp.text, 'html.parse')
+    soup = BeautifulSoup(resp.text, 'html.parser')
 
     pdb.set_trace()
     pass
