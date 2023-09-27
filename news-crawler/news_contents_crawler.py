@@ -9,7 +9,8 @@ from bs4 import BeautifulSoup
 
 import warnings
 # PythonDeprecationWarning을 무시하는 필터 추가
-warnings.filterwarnings("ignore", category=PythonDeprecationWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 def fetch_news_contents(msg):
 #    print(msg)
