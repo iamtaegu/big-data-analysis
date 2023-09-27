@@ -9,6 +9,14 @@ if __name__ == '__main__':
     while True:
         print(f'[{dt.datetime.now()}] Fetching news')
 
+        messages = queue.receive_messages(
+            MessageAttributeNames=['All'],
+            MaxNumberOfMessages=10,
+            WaitTimeSeconds=1,
+        )
+
+        print(messages)
+
         pdb.set_trace()
         pass
 
