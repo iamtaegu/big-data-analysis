@@ -4,6 +4,7 @@ import boto3
 import datetime as dt
 import json
 import requests
+import re
 
 from bs4 import BeautifulSoup
 
@@ -65,6 +66,9 @@ def fetch_news_contents(msg):
     images_urls = [x['data-src'] for x in images]
     images_urls = list(set(images_urls))
 
+    byline = soup.find("span", {"class": "byline_s"})
+    reporter_name, reporter_email = extract_reporter(byline)
+
     print()
     print(publisher)
     print(created_at)
@@ -75,6 +79,25 @@ def fetch_news_contents(msg):
 
     pdb.set_trace()
     pass
+
+def extract_reporter(byline):
+    if byline is None:
+        return '', ''
+
+    byline = byline.text
+    m = re.match(r'([\wㄱ-ㅎ가-힣]+)\s*(기자)?\s*\(?([\w\.]+@[\w\.]+)\)?', byline)
+    # m[0]: 전체, m[1]: 이름, m[3]: 이메일
+    if m:
+        return m[1], [3]
+
+    # 이메일이 없을 수 있음
+    m = re.match(r'([\wㄱ-ㅎ가-힣]+)\s*(기자)?', byline)
+    if m:
+        return m[1], ''
+
+    print(byline)
+
+    return '', ''
 
 def parse_datestr(span):
     if span.has_attr('data-date-time'):
