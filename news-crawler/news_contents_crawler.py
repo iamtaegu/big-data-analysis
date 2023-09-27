@@ -7,11 +7,6 @@ import requests
 
 from bs4 import BeautifulSoup
 
-import warnings
-# PythonDeprecationWarning을 무시하는 필터 추가
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-
 def fetch_news_contents(msg):
 #    print(msg)
     #print(msg.message_id)
@@ -82,7 +77,7 @@ def parse_datestr(span):
 
 def parse_media_info(soup):
     media_info = soup.find("div", {"class": "media_end_head_info_datestamp"})
-    print(media_info)
+    #print(media_info)
 
     if media_info:
         datestr_list = media_info.find_all("span", {"class":"media_end_head_info_datestamp_time"})
