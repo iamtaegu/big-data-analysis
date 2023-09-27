@@ -3,6 +3,12 @@ import time
 import boto3
 import datetime as dt
 
+def fetch_news_contents(msg):
+    print(msg)
+
+    pdb.set_trace()
+    pass
+
 if __name__ == '__main__':
     sqs = boto3.resource('sqs')
     queue = sqs.get_queue_by_name(QueueName='naver-news-list')
@@ -31,7 +37,12 @@ if __name__ == '__main__':
         for msg in messages:
             print('.', end='', flush=True)
 
-        print()
+            entry = fetch_news_contents(msg)
+
+            if entry:
+                buffer.append(entry)
+
+        print('!!')
 
         pdb.set_trace()
         pass
