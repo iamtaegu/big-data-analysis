@@ -176,8 +176,9 @@ if __name__ == '__main__':
             if entry:
                 buffer.append(entry)
 
+        pdb.set_trace()
+
         print('!!')
 
-        pdb.set_trace()
         pass
 
