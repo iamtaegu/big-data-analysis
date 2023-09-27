@@ -69,6 +69,13 @@ def fetch_news_contents(msg):
     pass
 
 def parse_datestr(span):
+    if span.has_attr('data-date-time'):
+        datestr = span('data-date-time')
+    elif span.has_attr('data-modify-date-time'):
+        datestr = span('data-modify-date-time')
+    else:
+        return None
+
     pdb.set_trace()
     pass
 
