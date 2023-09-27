@@ -24,6 +24,14 @@ def fetch_news_contents(msg):
 
     soup = BeautifulSoup(resp.text, 'html.parser')
 
+    node = soup.find("meta", {"property": "og:article:author"})
+    if node:
+        content = node['content']
+        print(content)
+
+        pdb.set_trace()
+        pass
+
     pdb.set_trace()
     pass
 
