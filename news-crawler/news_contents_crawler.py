@@ -54,11 +54,19 @@ def fetch_news_contents(msg):
         print(item)
         pdb.set_trace()
 
+    body = soup.find("div", {"id":"newsct_article"})
+
+    # 뉴스 본문이 없으면 비정상이기 때문에 종료 시킴
+    assert body is not None
+
+    body_text = body.text.strip()
+
     print()
     print(publisher)
     print(created_at)
     print(updated_at)
     print(source_url)
+    print(body_text)
 
     pdb.set_trace()
     pass
