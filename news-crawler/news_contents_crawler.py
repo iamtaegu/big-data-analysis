@@ -162,8 +162,21 @@ def upload_to_elastic_search(buffer):
         data += json.dumps(index) + '\n'
         data += json.dumps(x) + '\n'
 
-        pdb.set_trace()
-        pass
+    url = f'{ELASTICSEARCH_URL}/news/_bulk?pretty&refresh'
+
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    resp = requests.post(
+        url,
+        headers=headers,
+        data=data,
+        auth=ELASTICSEARCH_AUTH,
+    )
+
+    pdb.set_trace()
+    pass
 
 
 if __name__ == '__main__':
