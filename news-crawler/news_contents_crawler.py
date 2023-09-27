@@ -47,11 +47,28 @@ def fetch_news_contents(msg):
 
     datestr_list, source_url = parse_media_info(soup)
 
+    if len(datestr_list) == 1:
+        created_at = parse_datestr(datestr_list[0])
+        updated_at =- created_at
+
+    elif len(datestr_list) == 2:
+        created_at = parse_datestr(datestr_list[0])
+        updated_at = parse_datestr(datestr_list[1])
+
+    else:
+        print(item)
+        pdb.set_trace()
+
     print()
     print(publisher)
-    print(datestr_list)
+    print(created_at)
+    print(updated_at)
     print(source_url)
 
+    pdb.set_trace()
+    pass
+
+def parse_datestr(span):
     pdb.set_trace()
     pass
 
