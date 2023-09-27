@@ -8,6 +8,8 @@ import re
 
 from bs4 import BeautifulSoup
 
+from config import *
+
 def fetch_news_contents(msg):
 #    print(msg)
     #print(msg.message_id)
