@@ -29,8 +29,19 @@ def fetch_news_contents(msg):
         content = node['content']
         print(content)
 
+        if '네이버 스포츠' in content:
+            return None
+        if 'TV연애' in content:
+            return None
+
+        tokens = content.split('|')
+        publisher = tokens[0].strip()
+
+    else:
         pdb.set_trace()
-        pass
+
+    print()
+    print(publisher)
 
     pdb.set_trace()
     pass
