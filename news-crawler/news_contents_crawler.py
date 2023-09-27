@@ -142,7 +142,6 @@ def parse_media_info(soup):
 
         return datestr_list, source_url
 
-    pdb.set_trace()
 
 def upload_to_elastic_search(buffer):
     if len(buffer) == 0:
@@ -175,10 +174,7 @@ def upload_to_elastic_search(buffer):
         auth=ELASTICSEARCH_AUTH,
     )
 
-    print(resp.status_code)
-
-    pdb.set_trace()
-    pass
+    assert resp.status_code == 200
 
 
 if __name__ == '__main__':
@@ -218,6 +214,4 @@ if __name__ == '__main__':
 
         print('!!')
 
-        pdb.set_trace()
-        pass
 
