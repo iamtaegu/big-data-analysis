@@ -7,6 +7,10 @@ import requests
 
 from bs4 import BeautifulSoup
 
+import warnings
+# PythonDeprecationWarning을 무시하는 필터 추가
+warnings.filterwarnings("ignore", category=PythonDeprecationWarning)
+
 def fetch_news_contents(msg):
 #    print(msg)
     #print(msg.message_id)
