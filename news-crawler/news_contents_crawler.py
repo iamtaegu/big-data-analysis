@@ -94,9 +94,7 @@ def fetch_news_contents(msg):
         'body': body_text
     }
 
-
-    pdb.set_trace()
-    pass
+    return entry
 
 def extract_reporter(byline):
     if byline is None:
