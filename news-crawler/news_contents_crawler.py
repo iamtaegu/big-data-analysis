@@ -142,6 +142,27 @@ def parse_media_info(soup):
 
     pdb.set_trace()
 
+def upload_to_elastic_search(buffer):
+    if len(buffer) == 0:
+        return
+
+    data = ''
+
+    for x in buffer:
+
+        index = {
+            'index': {
+                '_id': x['id']
+            }
+        }
+
+        # df to json
+        data += json.dumps(index) + '\n'
+        data += json.dumps(x) + '\n'
+
+        pdb.set_trace()
+        pass
+
 
 if __name__ == '__main__':
     sqs = boto3.resource('sqs')
@@ -176,9 +197,10 @@ if __name__ == '__main__':
             if entry:
                 buffer.append(entry)
 
-        pdb.set_trace()
+        upload_to_elastic_search(buffer)
 
         print('!!')
 
+        pdb.set_trace()
         pass
 
