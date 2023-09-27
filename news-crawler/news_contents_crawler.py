@@ -69,15 +69,31 @@ def fetch_news_contents(msg):
     byline = soup.find("span", {"class": "byline_s"})
     reporter_name, reporter_email = extract_reporter(byline)
 
-    print()
-    print(publisher)
-    print(created_at)
-    print(updated_at)
-    print(source_url)
-    print(body_text)
-    print(images_urls)
-    print(reporter_name)
-    print(reporter_email)
+    # print()
+    # print(publisher)
+    # print(created_at)
+    # print(updated_at)
+    # print(source_url)
+    # print(body_text)
+    # print(images_urls)
+    # print(reporter_name)
+    # print(reporter_email)
+
+    entry = {
+        'id': item['msg_id'],
+        'title': item['title'],
+        'section': 'economy',
+        'naver_url': item['url'],
+        'source_url': source_url,
+        'image_urls': image_urls,
+        'publisher': publisher,
+        'created_at': created_at.isoformat(),
+        'updated_at': updated_at.isoformat(),
+        'reporter_name': reporter_name,
+        'reporter_email': reporter_email,
+        'body': body_text
+    }
+
 
     pdb.set_trace()
     pass
