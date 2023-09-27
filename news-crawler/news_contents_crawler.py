@@ -76,6 +76,8 @@ def fetch_news_contents(msg):
     print(source_url)
     print(body_text)
     print(images_urls)
+    print(reporter_name)
+    print(reporter_email)
 
     pdb.set_trace()
     pass
