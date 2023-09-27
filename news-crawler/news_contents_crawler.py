@@ -90,7 +90,7 @@ def extract_reporter(byline):
     m = re.match(r'([\wㄱ-ㅎ가-힣]+)\s*(기자)?\s*\(?([\w\.]+@[\w\.]+)\)?', byline)
     # m[0]: 전체, m[1]: 이름, m[3]: 이메일
     if m:
-        return m[1], [3]
+        return m[1], m[3]
 
     # 이메일이 없을 수 있음
     m = re.match(r'([\wㄱ-ㅎ가-힣]+)\s*(기자)?', byline)
