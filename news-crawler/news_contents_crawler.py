@@ -141,7 +141,8 @@ def parse_media_info(soup):
         source_url = link['href'] if link else ''
 
         return datestr_list, source_url
-
+    else :
+        return '', ''
 
 def upload_to_elastic_search(buffer):
     if len(buffer) == 0:
