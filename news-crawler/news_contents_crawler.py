@@ -16,7 +16,7 @@ def fetch_news_contents(msg):
     #print(msg.body)
 
     item = json.loads(msg.body)
-    #print(item)
+    # print(item)
 
     headers = { 'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0' }
 
@@ -189,7 +189,7 @@ if __name__ == '__main__':
 
         messages = queue.receive_messages(
             MessageAttributeNames=['All'],
-            MaxNumberOfMessages=10,
+            MaxNumberOfMessages=100,
             WaitTimeSeconds=1,
         )
 
