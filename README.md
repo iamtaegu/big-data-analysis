@@ -1,6 +1,12 @@
 # big-data-analysis
 big-data-analysis
 
+## github
+
+ * git config --global --list
+ * git config --global credential.helper store
+   * ~/.git-credentials 경로에 저장
+
 ## 2023-09-27
 
  * openSearch shcema 정의
