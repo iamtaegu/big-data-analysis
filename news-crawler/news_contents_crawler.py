@@ -34,7 +34,7 @@ def fetch_news_contents(msg):
 
         if '네이버 스포츠' in content:
             return None
-        if 'TV연애' in content:
+        if 'TV연예' in content:
             return None
 
         tokens = content.split('|')
