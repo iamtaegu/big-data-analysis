@@ -101,7 +101,7 @@ def push_to_aws_queue(buffer):
 if __name__ == '__main__':
     base_date = dt.datetime(2023, 8, 1)
 
-    for d in range(55):
+    for d in range(45):
         date = base_date + relativedelta(days=d)
 
         fetch_news_list_for_date(date);
