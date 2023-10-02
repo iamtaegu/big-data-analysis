@@ -189,7 +189,7 @@ if __name__ == '__main__':
 
         messages = queue.receive_messages(
             MessageAttributeNames=['All'],
-            MaxNumberOfMessages=100,
+            MaxNumberOfMessages=10,
             WaitTimeSeconds=1,
         )
 
