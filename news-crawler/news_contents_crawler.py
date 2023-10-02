@@ -65,7 +65,9 @@ def fetch_news_contents(msg):
     body_text = body.text.strip()
 
     images = body.find_all("img")
-    image_urls = [x['data-src'] for x in images]
+    # image_urls = [x['data-src'] for x in images]
+    # x(Tag객체)에 data-src가 없는 경우에는 빈값으로 설정
+    image_urls = [x['data-src'] if 'data-src' in x else '' for x in images]
     image_urls = list(set(image_urls))
 
     byline = soup.find("span", {"class": "byline_s"})
