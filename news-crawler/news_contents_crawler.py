@@ -40,8 +40,8 @@ def fetch_news_contents(msg):
         tokens = content.split('|')
         publisher = tokens[0].strip()
 
-    else:
-        pdb.set_trace()
+    #else:
+    #    pdb.set_trace()
 
     datestr_list, source_url = parse_media_info(soup)
 
@@ -197,7 +197,7 @@ if __name__ == '__main__':
 
         if len(messages) == 0:
             print('- Queue is empty. Wait for a while..')
-            time.sleep(60)
+#            time.sleep(60)
             continue
 
         #for msg in messages:
