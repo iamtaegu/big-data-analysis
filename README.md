@@ -7,6 +7,10 @@ big-data-analysis
  * git config --global credential.helper store
    * ~/.git-credentials 경로에 저장
 
+## 명령어 관련
+ * nohup command > logfile 2>&1 &
+	- stderr > stdout, 표준에러도 표준출력으로 리다이렉트시킴
+
 ## 2023-09-27
 
  * openSearch shcema 정의

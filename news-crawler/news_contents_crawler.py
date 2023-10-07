@@ -212,6 +212,9 @@ if __name__ == '__main__':
 
             if entry:
                 buffer.append(entry)
+			
+			# 병령처리를 위해 처리된 메세지는 삭제 
+			msg.delete()
 
         upload_to_elastic_search(buffer)
 
