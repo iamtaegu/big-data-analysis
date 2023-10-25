@@ -18,3 +18,10 @@ big-data-analysis
  * 이번주에는 SQS에 데이터를 넣고 빼서 OpenSearch에 쓸거임
  * 과제 
    * 
+
+## 2023-10-25 (9주차)
+  * 사전 설치 파일 
+    * 도커, 파이토치, 노em
+  * 대상 파일은 아래 두 개
+    * hugging_face
+    * add_sentiments
