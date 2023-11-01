@@ -1,11 +1,24 @@
 service: news-api-server
 frameworkVersion: '3'
 
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
 provider:
   name: aws
   runtime: python3.9
   stage: dev
   region: ap-northeast-2
+
+# 불필요 파일 제거
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
 
 functions:
   hello:
