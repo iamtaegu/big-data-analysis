@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 
 news-crawler/config.py
+news-api-server/config.py

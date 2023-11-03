@@ -1,4 +1,5 @@
 # Domain endpoint  
+#test
 ELASTICSEARCH_URL = ''
 ELASTICSEARCH_ID = ''
 ELASTICSEARCH_PW = ''
