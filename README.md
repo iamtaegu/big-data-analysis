@@ -6,10 +6,18 @@ big-data-analysis
  * git config --global --list
  * git config --global credential.helper store
    * ~/.git-credentials 경로에 저장
+ * git rm --cached config.py
+   * caching 목록 제거 
 
 ## 명령어 관련
  * nohup command > logfile 2>&1 &
 	- stderr > stdout, 표준에러도 표준출력으로 리다이렉트시킴
+
+## AWS 관련
+ * IAM 설정
+   1. pip install awscli
+   2. aws configure
+   3. aws sts get-caller-identity
 
 ## 2023-09-27
 
@@ -34,13 +42,18 @@ big-data-analysis
     * 생성: serverless create --template aws-python3 --name news-api-server --path news-api-server
     * 실행(로컬): serverless invoke local -f hello
     * serverless invoke local -f news_trends -p mocks/news_trends.json
-  * docker 관련
-    * npm init
-    * npm install --save serverless-python-requirements
-    
+
   * ec2 위에서 aws configure 설정 해주고,
     * serverless deploy 
       * 도커 설정을 넣어줬기 때문에
       * 람다는 이제 가상 머신을 실행시켜 줌
       * 이전에는 Pandas 같은 파이썬 기본 패키지가 아닌게 없었기 떄문에 실행 오류가 발생했었는데
-      * 그래서 해당 라이브러리를 포함한 가상 머신을 올려 실행 시켜주는 것음 
+      * 그래서 해당 라이브러리를 포함한 가상 머신을 올려 실행 시켜주는 것음
+    * Docker 컨테이너 생성
+      * conda env list
+      * conda activate news-api
+      * pip install requests pandas python-dotenv
+      * npm init
+      * npm install --save serverless-python-requirements
+      * No space left on device > export TMPDIR=$HOME/new/tmp/dir
+
