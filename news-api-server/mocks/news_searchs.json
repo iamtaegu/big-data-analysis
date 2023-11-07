@@ -1,0 +1,6 @@
+{
+  "queryStringParameters": {
+    "title" : "AI",
+    "sentiment": "negative"
+  }
+}

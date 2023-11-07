@@ -35,3 +35,10 @@ functions:
           path: /news_trends
           method: get
           cors: true
+  news_searchs:
+    handler: services.news_searchs.main
+    events:
+      - http:
+          path: /news_searchs
+          method: get
+          cors: true
