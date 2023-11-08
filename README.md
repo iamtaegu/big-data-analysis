@@ -57,3 +57,23 @@ big-data-analysis
       * npm install --save serverless-python-requirements
       * No space left on device > export TMPDIR=$HOME/new/tmp/dir
 
+## 2023-11-08 (11주차) - 과제는 3개 url(news-trends, sentiment_trends, web-app(Copyright 이름, News Analytics 두 개 수정) )
+  * React web-app 만들기 
+    * component - class
+    * Hook - Function (modern style)
+      * App.tsx가 하나의 hook 으로 볼 수 있음
+      * function App() 이 선언 돼 있음 
+    * AWS Amplify - hosting server
+  * 명령어
+    * npm - nodejs 에서 제공하는 package 설치하는 명령어 
+    * npx create-react-app news-web-app --template typescript  
+      * template 를 명시하지 않으면 javascript 가 default 
+    * npm run build (여기 수행 필요)
+      * 생성된 build 폴더를 Amplify 에 전송
+  * extensions
+    * Prettier 
+  * UI 
+    1. bootstrap 
+    2. MUI(USA) - npm install @mui/material @emotion/react @emotion/styled, npm install @mui/icons-material
+    3. Ant Design(Asia)
+  * fonts - fonts.google.com   
