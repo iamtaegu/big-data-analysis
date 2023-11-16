@@ -13,7 +13,7 @@ def req_text_generation(params):
         text = params.get('contents')
 
         return generator(text, max_length=128)
-    
+
 def main(event, context):
     params = event.get('queryStringParameters')
 
