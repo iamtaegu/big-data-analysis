@@ -49,3 +49,10 @@ functions:
           path: /sentiment_trends
           method: get
           cors: true
+  text_generation:
+    handler: services.text_generation.main
+    events:
+      - http:
+          path: /text_generation
+          method: get
+          cors: true
