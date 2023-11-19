@@ -5,11 +5,20 @@ import pandas as pd
 
 from config import *
 from transformers import pipeline
+from googletrans import Translator
 
 def fetch_missing_summary():
     body = {
         "query": {
             "bool": {
+                # 특정 title
+                "must": [
+                    {
+                        "match": {
+                            "title": "삼성"
+                        }
+                    }
+                ],
                 "must_not": [
                     {
                         "exists": {
@@ -45,15 +54,37 @@ def fetch_missing_summary():
 
     return df
 
+def upload_to_server(df):
+
+    for _, row in df.iterrows():
+
+        body = {
+            "doc": {
+                "summary": row.summary,
+            }
+
+        }
+        body = json.dumps(body)
+
+        headers = {
+            'Content-Type': 'application/json'
+        }
+
+        # _update로 주지 않으면 override 됨
+        resp = requests.post(
+                f"{ELASTICSEARCH_URL}/news/_update/{row['id']}",
+                headers=headers,
+                data=body,
+                auth=ELASTICSEARCH_AUTH,
+        )
+
+        assert resp.status_code == 200
+
+
+
 if __name__ == '__main__':
-    summarizer = pipeline('summarization')
-
-    text = "Steven Paul Jobs (February 24, 1955 – October 5, 2011) was an American entrepreneur, inventor, business magnate, media proprietor, and investor. He was the co-founder, chairman, and CEO of Apple; the chairman and majority shareholder of Pixar; a member of The Walt Disney Company's board of directors following its acquisition of Pixar; and the founder, chairman, and CEO of NeXT. He is widely recognized as a pioneer of the personal computer revolution of the 1970s and 1980s, along with his early business partner and fellow Apple co-founder Steve Wozniak."
-
-    # 주어진 text를 64 길이 안으로 요약해줘
-    df = pd.DataFrame(summarizer(text, max_length=64))
-
-    print(df.summary_text.values[0])
+    google = Translator()
+    summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
 
     while True:
         df = fetch_missing_summary()
@@ -61,11 +92,20 @@ if __name__ == '__main__':
         if df.empty:
             break
 
-        pdb.set_trace()
+        body_list = df['body'].tolist()
+        # 1. body > en_body
+        en_body_output = google.translate(body_list, dest='en')
+        en_body_list = [body_transleated.text for body_transleated in en_body_output]
 
-        bodies = df['body'].tolist()
-        summaries = summarizer(bodies)
+        # 2. en_body > en_summary
+        # default length 사용
+        en_summary_output = summarizer(en_body_list)
+        en_summary_list = [en_summary['summary_text'] for en_summary in en_summary_output]
 
-        df = df.join(summaries)
+        # 3. en_summary > ko_summary
+        ko_body_output = google.translate(en_summary_list, dest='ko')
+        ko_body_list = [ko_body.text for ko_body in ko_body_output]
 
-        pdb.set_trace()
+        df['summary'] = ko_body_list
+
+        upload_to_server(df)
