@@ -99,7 +99,9 @@ if __name__ == '__main__':
 
         # 2. en_body > en_summary
         # default length 사용
-        en_summary_output = summarizer(en_body_list)
+        max_sequence_length = 1024
+        en_body_list_split = [en_body[:max_sequence_length] for en_body in en_body_list]
+        en_summary_output = summarizer(en_body_list_split, max_length=64)
         en_summary_list = [en_summary['summary_text'] for en_summary in en_summary_output]
 
         # 3. en_summary > ko_summary
