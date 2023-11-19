@@ -1,6 +1,6 @@
 {
   "queryStringParameters": {
-    "title" : "AI",
-    "sentiment": "negative"
+    "title" : "삼성",
+    "sentiment": "positive"
   }
 }

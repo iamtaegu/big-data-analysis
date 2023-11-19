@@ -1,3 +1,5 @@
+
+import pdb
 import json
 import requests
 import pandas as pd
@@ -7,7 +9,13 @@ def query_news_searchs(params):
     query = {
         "query": {
             "bool": {
-                "must": []
+                "must": [
+                    {
+                        "exists": {
+                            "field": "summary"
+                        }
+                    }
+                ]
             }
         }
     }
