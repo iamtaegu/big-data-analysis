@@ -85,10 +85,13 @@ if __name__ == '__main__':
             break
 
         body_list = df['body'].tolist()
+        body_list = [str for str in body_list if str] #빈 문자열 제거
+
         # 1. body > en_body
 
         # en_body_output = google.translate(body_list, dest='en')
         en_body_output = [google.translate(body, dest='en') for body in body_list]
+
         en_body_list = [body_transleated.text for body_transleated in en_body_output]
 
         # 2. en_body > en_summary
@@ -104,5 +107,7 @@ if __name__ == '__main__':
         ko_body_list = [ko_body.text for ko_body in ko_body_output]
 
         df['summary'] = ko_body_list
+
+        print('------------------------------------upload_to_server------------------------------------')
 
         upload_to_server(df)
