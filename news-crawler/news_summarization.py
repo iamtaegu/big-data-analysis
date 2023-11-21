@@ -11,14 +11,6 @@ def fetch_missing_summary():
     body = {
         "query": {
             "bool": {
-                # 특정 title
-                "must": [
-                    {
-                        "match": {
-                            "title": "삼성"
-                        }
-                    }
-                ],
                 "must_not": [
                     {
                         "exists": {
@@ -94,18 +86,21 @@ if __name__ == '__main__':
 
         body_list = df['body'].tolist()
         # 1. body > en_body
-        en_body_output = google.translate(body_list, dest='en')
+
+        # en_body_output = google.translate(body_list, dest='en')
+        en_body_output = [google.translate(body, dest='en') for body in body_list]
         en_body_list = [body_transleated.text for body_transleated in en_body_output]
 
         # 2. en_body > en_summary
         # default length 사용
         max_sequence_length = 1024
         en_body_list_split = [en_body[:max_sequence_length] for en_body in en_body_list]
-        en_summary_output = summarizer(en_body_list_split, max_length=64)
+        en_summary_output = summarizer(en_body_list_split)
         en_summary_list = [en_summary['summary_text'] for en_summary in en_summary_output]
 
         # 3. en_summary > ko_summary
-        ko_body_output = google.translate(en_summary_list, dest='ko')
+        #ko_body_output = google.translate(en_summary_list, dest='ko')
+        ko_body_output = [google.translate(en_summary, dest='ko') for en_summary in en_summary_list]
         ko_body_list = [ko_body.text for ko_body in ko_body_output]
 
         df['summary'] = ko_body_list
