@@ -84,8 +84,10 @@ if __name__ == '__main__':
         if df.empty:
             break
 
+        max_translate_length = 5000
         body_list = df['body'].tolist()
         body_list = [str for str in body_list if str] #빈 문자열 제거
+        body_list = [str[:5000] for str in body_list]
 
         # 1. body > en_body
 
@@ -105,6 +107,10 @@ if __name__ == '__main__':
         #ko_body_output = google.translate(en_summary_list, dest='ko')
         ko_body_output = [google.translate(en_summary, dest='ko') for en_summary in en_summary_list]
         ko_body_list = [ko_body.text for ko_body in ko_body_output]
+
+        # 빈 문자열 제거
+        df['body'].replace('', pd.NA, inplace=True)
+        df = df.dropna(subset=['body'])
 
         df['summary'] = ko_body_list
 
