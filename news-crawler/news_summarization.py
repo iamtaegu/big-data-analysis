@@ -34,7 +34,10 @@ def fetch_missing_summary():
         auth=ELASTICSEARCH_AUTH,
     )
 
-    assert resp.status_code == 200
+    # assert resp.status_code == 200
+
+    if resp.status_code != 200:
+        return ''
 
     results = resp.json()
 
@@ -70,8 +73,10 @@ def upload_to_server(df):
                 auth=ELASTICSEARCH_AUTH,
         )
 
-        assert resp.status_code == 200
+        # assert resp.status_code == 200
 
+        if resp.status_code != 200:
+            return ''
 
 
 if __name__ == '__main__':
