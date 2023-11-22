@@ -1,13 +1,12 @@
 import * as React from 'react';
-import Divider from '@mui/material/Divider';
+import { useNavigate, useLocation } from "react-router-dom";
+
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
+import ListItemButton from '@mui/material/ListItemButton';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
@@ -17,6 +16,10 @@ import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputCompone
 import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+
+import { NEWS_TRENDS_PATH, SENTIMENT_TRENDS_PATH } from '../App';
 
 const categories = [
   {
@@ -64,6 +67,22 @@ const itemCategory = {
 
 export default function Navigator(props: DrawerProps) {
   const { ...other } = props;
+  const navigate = useNavigate();
+  const { pathname } = useLocation(); // 오른쪽 객체에서 pathname 만 사용하겠음
+
+  // redundancy 제거 & 가독성 향상
+  const menus = [
+    {
+      title: 'News Trends',
+      path: NEWS_TRENDS_PATH,
+      icon: <ShowChartIcon />,
+    },
+    {
+      title: 'Sentiment Trends',
+      path: SENTIMENT_TRENDS_PATH,
+      icon: <FavoriteIcon />,
+    },
+  ]
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -71,28 +90,22 @@ export default function Navigator(props: DrawerProps) {
         <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
           News Analytics
         </ListItem>
-        <ListItem sx={{ ...item, ...itemCategory }}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
-        </ListItem>
-        {categories.map(({ id, children }) => (
-          <Box key={id} sx={{ bgcolor: '#101F33' }}>
-            <ListItem sx={{ py: 2, px: 3 }}>
-              <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
-            </ListItem>
-            {children.map(({ id: childId, icon, active }) => (
-              <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{childId}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-            <Divider sx={{ mt: 2 }} />
-          </Box>
-        ))}
+        {
+          menus.map(({title, path, icon}) => (
+            <ListItem sx={{ ...item, ...itemCategory }}>
+            <ListItemButton
+                selected={pathname === path}
+                onClick={() => {
+                  navigate(path);
+                }}
+            >
+              <ListItemIcon>
+                {icon}
+              </ListItemIcon>
+              <ListItemText>{title}</ListItemText>
+            </ListItemButton>
+          </ListItem>))
+        }
       </List>
     </Drawer>
   );

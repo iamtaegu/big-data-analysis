@@ -13,8 +13,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        오태건(href도 수정)
+      <Link color="inherit" href="https://prod.d3b26o669mx12l.amplifyapp.com/">
+        오태건
       </Link>{' '}
       {new Date().getFullYear()}.
     </Typography>
