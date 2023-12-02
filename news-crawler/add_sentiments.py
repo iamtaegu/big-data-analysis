@@ -74,6 +74,8 @@ def upload_to_server(df):
                 auth=ELASTICSEARCH_AUTH,
         )
 
+        print('------------------------------------upload_to_server------------------------------------')
+
         if resp.status_code != 200:
             return ''
 
