@@ -31,6 +31,9 @@ def query_sentiment_trends(search):
             }
         }
 
+    print (query)
+
+
     query = json.dumps(query)
 
     headers = {

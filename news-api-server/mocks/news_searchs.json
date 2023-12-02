@@ -1,6 +1,6 @@
 {
   "queryStringParameters": {
-    "title" : "삼성",
+    "title" : "samsung",
     "sentiment": "positive"
   }
 }

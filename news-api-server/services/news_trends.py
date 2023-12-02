@@ -1,10 +1,17 @@
 import json
+import pdb
+
 import requests
 import pandas as pd
 from config import *
 
-def query_news_trends(search):
+def query_news_trends(params):
     query = {
+        "query": {
+            "bool": {
+                "must": []
+            }
+        },
         "size": 0,
         "aggs": {
             "group_by_date": {
@@ -15,13 +22,16 @@ def query_news_trends(search):
             }
         }
     }
-    
-    if search:
-        query['query'] = {
-            "match": {
-                "title": search
-            }
-        }
+
+    if params:
+        for key, value in params.items():
+            query["query"]["bool"]["must"].append({
+                "match": {
+                    key: value
+                }
+            })
+
+    pdb.set_trace();
 
     query = json.dumps(query)
 
@@ -57,7 +67,7 @@ def main(event, context):
     else:
         search = None
 
-    trends = query_news_trends(search)
+    trends = query_news_trends(params)
 
     body = {
         'message': trends        
