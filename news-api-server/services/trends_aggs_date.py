@@ -29,6 +29,9 @@ def query_news_searchs(params):
         for key, value in params.items():
             if "date" == key:
 
+                if len(value) == 0:
+                    continue
+
                 fromDate = value[:4] + '-' + value[4:]
                 toDate = ''
 
