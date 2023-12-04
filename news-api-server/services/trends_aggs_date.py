@@ -36,7 +36,10 @@ def query_news_searchs(params):
                 toDate = ''
 
                 day = int(value[4:])+1
-                if day < 10:
+
+                if day == 13:
+                    toDate = value[:4] + '-' + '01'
+                elif day < 10:
                     toDate = value[:4] + '-' + '0' + str(day)
                 else:
                     toDate = value[:4] + '-' + str(day)
