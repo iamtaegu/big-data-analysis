@@ -23,7 +23,7 @@ def query_news_searchs(params):
         }
     }
 
-    targetQuery = ''
+    targetQuery = 'title'
 
     # SELECT * FROM TABLE WHERE key like '%value%'
     # AND (created_at >= value AND created_at < date)
