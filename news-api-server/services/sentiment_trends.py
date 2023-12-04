@@ -9,17 +9,17 @@ def query_sentiment_trends(search):
         "size": 0,
         "aggs": {
             "group_by_date": {
-            "date_histogram": {
-                "field": "created_at",
-                "interval": "day"
-            },
-            "aggs": {
-                "group_by_sentiment": {
-                "terms": {
-                    "field": "sentiment.keyword"
+                "date_histogram": {
+                    "field": "created_at",
+                    "interval": "day"
+                },
+                "aggs": {
+                    "group_by_sentiment": {
+                        "terms": {
+                            "field": "sentiment.keyword"
+                        }
+                    }
                 }
-                }
-            }
             }
         }
     }

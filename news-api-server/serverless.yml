@@ -49,11 +49,11 @@ functions:
           path: /sentiment_trends
           method: get
           cors: true
-  trends_search_date:
-    handler: services.trends_search_date.main
+  trends_aggs_date:
+    handler: services.trends_aggs_date.main
     events:
       - http:
-          path: /trends_search_date
+          path: /trends_aggs_date
           method: get
           cors: true
 #  text_generation:

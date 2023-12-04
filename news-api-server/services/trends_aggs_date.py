@@ -6,6 +6,15 @@ from config import *
 
 def query_news_searchs(params):
     query = {
+        "size": 0,
+        "aggs": {
+            "group_by_date": {
+                "date_histogram": {
+                    "field": "created_at",
+                    "interval": "day"
+                }
+            }
+        },
         "query": {
             "bool": {
                 "must": [
@@ -37,6 +46,25 @@ def query_news_searchs(params):
                         }
                     }
                 })
+            elif "sentiment" == key:
+
+                query['aggs']['group_by_date']['aggs'] = {
+                    "group_by_sentiment": {
+                        "terms": {
+                            "field": "sentiment.keyword"
+                        }
+                    }
+                }
+
+            elif "title" == key:
+
+                if len(value) > 0:
+                    query["query"]["bool"]["must"].append({
+                        "match": {
+                            key: value
+                        }
+                    })
+
             else :
                 query["query"]["bool"]["must"].append({
                     "match": {
