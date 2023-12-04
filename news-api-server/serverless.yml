@@ -10,7 +10,7 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.11
   stage: dev
   region: ap-northeast-2
 
@@ -47,6 +47,13 @@ functions:
     events:
       - http:
           path: /sentiment_trends
+          method: get
+          cors: true
+  trends_search_date:
+    handler: services.trends_search_date.main
+    events:
+      - http:
+          path: /trends_search_date
           method: get
           cors: true
 #  text_generation:
