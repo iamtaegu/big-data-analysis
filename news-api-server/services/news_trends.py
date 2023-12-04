@@ -25,12 +25,10 @@ def query_news_trends(search):
 
     if search:
         query['query'] = {
-            "match": {
-                "title": search
+            'match': {
+                'title': search
             }
         }
-
-    pdb.set_trace();
 
     query = json.dumps(query)
 
