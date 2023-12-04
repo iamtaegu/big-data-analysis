@@ -103,7 +103,21 @@ def query_news_searchs(params):
     buckets = results['aggregations']['group_by_date']['buckets']
     df = pd.DataFrame()
     if "sentiment" == targetQuery:
-        df = convert_sentiment_trends(buckets)
+        buffer = []
+
+        # 중첩된 데이터를 한 줄로 변경
+        for x in buckets:
+            sents = x['group_by_sentiment']['buckets']
+
+            entry = {t['key']: t['doc_count'] for t in sents}
+            entry['date'] = x['key_as_string']
+
+            buffer.append(entry)
+
+        if len(buffer) == 0:
+            return []
+
+        df = convert_sentiment_trends(buffer)
     elif "title" == targetQuery:
         df = convert_news_trends(buckets)
     else:
@@ -118,22 +132,7 @@ def convert_news_trends(buckets):
 
     return df
 
-def convert_sentiment_trends(buckets):
-
-    buffer = []
-
-    # 중첩된 데이터를 한 줄로 변경
-    for x in buckets:
-
-        sents = x['group_by_sentiment']['buckets']
-
-        entry = {t['key']: t['doc_count'] for t in sents}
-        entry['date'] = x['key_as_string']
-
-        buffer.append(entry)
-
-    if len(buffer)  == 0:
-        return []
+def convert_sentiment_trends(buffer):
 
     df = pd.DataFrame(buffer)
     df['date'] = df['date'].str[:10]

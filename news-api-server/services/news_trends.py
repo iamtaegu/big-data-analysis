@@ -5,7 +5,7 @@ import requests
 import pandas as pd
 from config import *
 
-def query_news_trends(params):
+def query_news_trends(search):
     query = {
         "query": {
             "bool": {
