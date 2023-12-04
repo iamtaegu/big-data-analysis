@@ -1,6 +1,7 @@
 {
   "queryStringParameters": {
     "title" : "samsung",
-    "sentiment": "positive"
+    "sentiment": "positive",
+    "date": "202308"
   }
 }
