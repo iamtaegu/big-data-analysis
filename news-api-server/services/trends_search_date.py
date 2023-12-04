@@ -27,7 +27,7 @@ def query_news_searchs(params):
                 if day < 10:
                     toDate = value[:4] + '-' + '0' + str(day)
                 else:
-                    toDate = value[:4] + '-' + + day
+                    toDate = value[:4] + '-' + day
 
                 query["query"]["bool"]["must"].append({
                     "range": {
