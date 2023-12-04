@@ -119,6 +119,10 @@ def query_news_searchs(params):
 
         df = convert_sentiment_trends(buffer)
     elif "title" == targetQuery:
+
+        if len(buckets) == 0:
+            return []
+
         df = convert_news_trends(buckets)
     else:
         df
