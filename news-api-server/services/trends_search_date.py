@@ -20,18 +20,21 @@ def query_news_searchs(params):
         for key, value in params.items():
             if "date" == key:
 
-                date = ''
-                day = int(key[4:])+1
+                fromDate = value[:4] + '-' + value[4:]
+                toDate = ''
 
+                day = int(value[4:])+1
                 if day < 10:
-                    date = key[:4] + '0' + str(day)
+                    toDate = value[:4] + '-' + '0' + str(day)
                 else:
-                    date = key[:4] + day
+                    toDate = value[:4] + '-' + + day
 
                 query["query"]["bool"]["must"].append({
                     "range": {
-                        "gte": value,
-                        "lt": date
+                        "created_at": {
+                            "gte": fromDate,
+                            "lt": toDate
+                        }
                     }
                 })
             else :
