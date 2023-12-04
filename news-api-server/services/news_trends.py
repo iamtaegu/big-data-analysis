@@ -23,13 +23,12 @@ def query_news_trends(params):
         }
     }
 
-    if params:
-        for key, value in params.items():
-            query["query"]["bool"]["must"].append({
-                "match": {
-                    key: value
-                }
-            })
+    if search:
+        query['query'] = {
+            "match": {
+                "title": search
+            }
+        }
 
     pdb.set_trace();
 
