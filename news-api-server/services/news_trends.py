@@ -67,7 +67,7 @@ def main(event, context):
     else:
         search = None
 
-    trends = query_news_trends(params)
+    trends = query_news_trends(search)
 
     body = {
         'message': trends        
