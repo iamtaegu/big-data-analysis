@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -18,6 +19,7 @@ import NewsTrendChart from "./NewsTrendChart";
 import SentimentTrendChart from "./SentimentTrendChart";
 
 export default function Content() {
+  const analytics = getAnalytics();
   const navigate = useNavigate();
   const { pathname, search } = useLocation();
 
@@ -31,6 +33,8 @@ export default function Content() {
     if (inputText) {
       url += `?search=${inputText}`;
     }
+
+    logEvent(analytics, "search", {inputText});
 
     navigate(url);
   }

@@ -21,8 +21,6 @@ export default function NewsTrendChart({ search }: IProps) {
         );
     }
 
-    console.log(data);
-
     const trace: Plotly.Data = {
         x: data.message.map((el) => el.date),
         y: data.message.map((el) => el.doc_count),
